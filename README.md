@@ -14,14 +14,12 @@
 
 1. Lets test our functions in **app.py** by running project 
 2. To avoid running project in every single change we can activate the **debug mode**
-- By adding this part of code in **app.py**
-```
-app.config['ENV'] = 'development'
-app.config['DEBUG'] = True
-app.config['TESTING'] = True
-```       
-- And running this two command in **terminal** 
-```
-$ set FLASK_ENV=development 
-$ set FLASK_DEBUG=1
-```
+    - By adding this part of code in **app.py**
+    ```
+    app.run(debug=True)
+    ```       
+    - And running this two command in **terminal** 
+    ```
+    $ set FLASK_ENV=development 
+    $ set FLASK_DEBUG=1
+    ```

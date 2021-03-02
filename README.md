@@ -4,9 +4,10 @@
 
 ## Get Started ✅✅
 
-1. Install (Python)[https://www.python.org/downloads/]        
-2. Install [PyCharm](https://www.jetbrains.com/fr-fr/pycharm/)         
-3. Create a new Flask project with Pycharm                  
+1. Install [Python](https://www.python.org/downloads/)        
+2. Install [Xamp](https://www.apachefriends.org/fr/download.html)
+3. Install [PyCharm](https://www.jetbrains.com/fr-fr/pycharm/)         
+4. Create a new Flask project with Pycharm                  
 
 
 ## Let's Jump In ✅✅

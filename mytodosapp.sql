@@ -63,9 +63,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `name`, `register_date`) VALUES
-(1, 'achref', 'a@a.com', '$5$rounds=535000$KdK2eTtJAINaj1B1$gQU0utzsWxxN2ESS9If5WguvTOYO6BC.SRVyz0BmtA9', 'achref', '2021-02-26 22:22:21'),
-(2, 'achref1', 'aa@a.com', '$5$rounds=535000$i1K0CwE/dBCdXYHB$f9O28CKntt0TqoUOcDV20ex7IFjGoI1IIq/qy4dk7H5', 'achref', '2021-02-27 11:19:29'),
-(3, 'jalloul', 'aaa@aaa.com', '$5$rounds=535000$VmplevI3eqn43N1F$YlnuTA45QSIiDcKCGWugQkUpwHHzdpWNbyJYMERw/a3', 'Jalloul Achref', '2021-02-27 18:38:38');
+(1, 'achref', 'a@a.com', '$5$rounds=535000$KdK2eTtJAINaj1B1$gQU0utzsWxxN2ESS9If5WguvTOYO6BC.SRVyz0BmtA9', 'achref', '2021-02-26 22:22:21');
 
 --
 -- Indexes for dumped tables

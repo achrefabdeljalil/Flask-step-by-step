@@ -49,6 +49,32 @@
             </body>
             </html>
         ```
-            
-        
-            
+4. To make our work more easy let's import all our package from begin and database configuration 
+```python
+from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
+from flask_mysqldb import MySQL
+
+from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from passlib.hash import sha256_crypt
+from functools import wraps
+
+app = Flask(__name__)
+
+# Config MySQL
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'myaticlesapp'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+# init MYSQL
+mysql = MySQL(app)
+```
+5. The editor will underline the missed package so let's import them 
+```bash
+pip install passlib
+pip install flask_mysqldb
+pip install wtforms
+pip install functools
+```
+

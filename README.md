@@ -35,21 +35,20 @@
     - Now Let's create the template correspondent to the **our service**
         - In the folder **template** let's create the **home.html** file
         - In **home.html** we can put this code as exemple 
-            <details><summary>Code ME</summary>
-            <p>
-            ```
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        ```
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>Document</title>
-                </head>
-                <body>
-                    <h1>hello world</h1>
-                </body>
-                </html>
-            ```
-            </p>
-            </details>
+            </head>
+            <body>
+                <h1>hello world</h1>
+            </body>
+            </html>
+        ```
+            
+        
+            

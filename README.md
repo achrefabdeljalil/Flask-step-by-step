@@ -148,3 +148,20 @@ and we can put this code as exemple
 </body>
 </html>
 ```
+and update the code of **home.html** to 
+```
+{% extends 'layout.html' %}
+{% block title %}
+  Home
+{% endblock %}
+{% block body %}
+    <div class="jumbotron mt-5">
+        <h1 class="display-4">Hello, This is My Todos App!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+            featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </div>
+{% endblock %}
+```

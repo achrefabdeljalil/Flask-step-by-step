@@ -78,4 +78,4 @@ pip install wtforms
 pip install functools
 ```
 
-6. We can also create our database to work with , in our project [Database file](https://drive.google.com/file/d/149G19WyYvmzWpJnK-wlM07xY5Hu6oVjr/view?usp=sharing)
+6. We can also create our database to work with , in our project <a href="https://drive.google.com/file/d/149G19WyYvmzWpJnK-wlM07xY5Hu6oVjr/view?usp=sharing" target="_blank">Database file</a>

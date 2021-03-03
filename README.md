@@ -88,63 +88,10 @@ and we can put this code as exemple
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
     <title>{% block title %} My Todos {% endblock %}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <style>
-        label {
-            display: none;
-        }
-    </style>
 </head>
 <body>
-{% include 'includes/_navbar.html' %}
-
-<div class="container ">
-    <div class="mt-3">
-        {% include 'includes/_messages.html' %}
-        {% block body %} {% endblock %}
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-<script type="text/javascript">
-    if (document.getElementById('editor')) {
-        CKEDITOR.replace('editor', {
-
-            toolbar: [
-                {name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates']},	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-                ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', 'Bold', 'Italic']
-            ]
-        });
-    }
-
-    function fade(element) {
-        var op = 1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op <= 0.1) {
-                clearInterval(timer);
-                element.style.display = 'none';
-            }
-            element.style.opacity = op;
-            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-            op -= op * 0.1;
-        }, 200);
-    }
-
-    if (document.getElementById('custom-alert')) {
-        let a = document.getElementById('custom-alert')
-        fade(a)
-
-    }
-</script>
+{% block body %} {% endblock %}
 </body>
 </html>
 ```
@@ -155,15 +102,24 @@ and update the code of **home.html** to
   Home
 {% endblock %}
 {% block body %}
-    <div class="jumbotron mt-5">
-        <h1 class="display-4">Hello, This is My Todos App!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-            featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </div>
+    <h1>hello from <em> home page</em></h1>
 {% endblock %}
+```
+8. The next step is to integrate [Bootstrap 4 ](https://getbootstrap.com/docs/5.0/getting-started/introduction/) with our project <br>
+the easiest way to integrate **Bootstrap 4** : is to add **CDN links** to our base **layout.html**
+in the `<head>` tag we put the link of **CSS requirement** 👇
+```jinja2
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+```
+and in before the end tag of `<body>` we put the links of **JS requirement**
+```jinja2
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
 ```
 and this is the file **_navbar.html**
 ```jinja2

@@ -49,7 +49,7 @@
             </body>
             </html>
         ```
-4. To make our work more easy let's import all our package from begin and database configuration 
+4. To make our work more easy let's import all our package  and database configuration from beginning 
 ```python
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 from flask_mysqldb import MySQL
@@ -105,9 +105,10 @@ and update the code of **home.html** to
     <h1>hello from <em> home page</em></h1>
 {% endblock %}
 ```
-8. The next step is to integrate [Bootstrap 4 ](https://getbootstrap.com/docs/5.0/getting-started/introduction/) with our project <br>
-the easiest way to integrate **Bootstrap 4** : is to add **CDN links** to our base **layout.html**
-in the `<head>` tag we put the link of **CSS requirement** 👇
+8. The next step is to integrate [Bootstrap 4 ](https://getbootstrap.com/docs/4.6/getting-started/introduction/) with our project <br>
+But what is **bootstrap** ?? 🙄🙄
+The easiest way to integrate **Bootstrap 4** : is to add **CDN links** to our base **layout.html** <br>
+In the `<head>` tag we put the link of **CSS requirement** 👇
 ```jinja2
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">

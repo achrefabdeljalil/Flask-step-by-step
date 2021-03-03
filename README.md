@@ -149,7 +149,7 @@ and we can put this code as exemple
 </html>
 ```
 and update the code of **home.html** to 
-```
+```jinja2
 {% extends 'layout.html' %}
 {% block title %}
   Home

@@ -165,3 +165,57 @@ and update the code of **home.html** to
     </div>
 {% endblock %}
 ```
+and this is the file **_navbar.html**
+```
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/"><Strong>My Articles</Strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/articles">Articles</a>
+                </li>
+
+            </ul>
+            {% if session.logged_in %}
+                <ul class="navbar-nav">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                    <a class="nav-link" href="/logout">Logout</a>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav">
+                    <a class="btn btn-outline-primary " href="/login">Login</a>
+                    <a class="btn btn-primary ml-2" href="/register">Register</a>
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
+```
+and this is the file **_messages.html** 
+```
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} " id="custom-alert">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% if error %}
+  <div class="alert alert-danger "  id="custom-alert">{{error}}</div>
+{% endif %}
+
+{% if msg %}
+  <div class="alert alert-success " id="custom-alert">{{msg}}</div>
+{% endif %}
+```

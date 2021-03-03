@@ -83,7 +83,7 @@ pip install functools
 7. To make our project more professional we can work with the **Block** notion  
 so let's create a file **layout.html** : this file will be the basic of our template 
 and we can put this code as exemple 
-```
+```jinja2
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,7 +166,7 @@ and update the code of **home.html** to
 {% endblock %}
 ```
 and this is the file **_navbar.html**
-```
+```jinja2
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="/"><Strong>My Articles</Strong></a>
@@ -202,7 +202,7 @@ and this is the file **_navbar.html**
 </nav>
 ```
 and this is the file **_messages.html** 
-```
+```jinja2
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}

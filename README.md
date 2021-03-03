@@ -71,7 +71,7 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 ```
 5. The editor will underline the missed package so let's import them 
-```bash
+```cmd
 pip install passlib
 pip install flask_mysqldb
 pip install wtforms

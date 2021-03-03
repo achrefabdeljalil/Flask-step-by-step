@@ -35,7 +35,7 @@
     - Now Let's create the template correspondent to the **our service**
         - In the folder **template** let's create the **home.html** file
         - In **home.html** we can put this code as exemple 
-        ```
+        ```jinja2
             <!DOCTYPE html>
             <html lang="en">
             <head>

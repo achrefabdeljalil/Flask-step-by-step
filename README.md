@@ -10,7 +10,7 @@
 4. Create a new Flask project with Pycharm                  
 
 
-## Let's Jump In ✅✅
+## Let's Jump In ✅✅ 
 
 
 1. Lets test our functions in **app.py** by running project 
@@ -19,7 +19,7 @@
     ```python
     if __name__ == '__main__':
     app.run(host="localhost", port=8000, debug=True)
-    ```       
+    ```
 3. And Now Let's test our template
     - By Importing the package **render_template** in **app.py**
     ```python
@@ -73,16 +73,19 @@ mysql = MySQL(app)
 5. The editor will underline the missed package so let's import them 
 ```cmd
 pip install passlib
-pip install flask_mysqldb
+pip install flask_mysqldb 
 pip install wtforms
 pip install functools
 ```
 
 6. We can also create our database to work with , in our project 
-<a href="https://drive.google.com/file/d/149G19WyYvmzWpJnK-wlM07xY5Hu6oVjr/view?usp=sharing" target="_blank">Database file</a>
-7. To make our project more professional we can work with the **Block** notion  
-so let's create a file **layout.html** : this file will be the basic of our template 
-and we can put this code as exemple 
+    <a href="https://drive.google.com/file/d/149G19WyYvmzWpJnK-wlM07xY5Hu6oVjr/view?usp=sharing" target="_blank">Database file</a>
+
+## Block Notion
+
+1. To make our project more professional we can work with the **Block** notion  
+    so let's create a file **layout.html** : this file will be the basic of our template 
+    and we can put this **code** as exemple 
 ```jinja2
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +98,7 @@ and we can put this code as exemple
 </body>
 </html>
 ```
-and update the code of **home.html** to 
+and update the **code** of **home.html** to 
 ```jinja2
 {% extends 'layout.html' %}
 {% block title %}
@@ -105,10 +108,16 @@ and update the code of **home.html** to
     <h1>hello from <em> home page</em></h1>
 {% endblock %}
 ```
-8. The next step is to integrate [Bootstrap 4 ](https://getbootstrap.com/docs/4.6/getting-started/introduction/) with our project <br>
+<br>
+
+  <br>
+## Integrate bootstrap 4
+
+The next step is to integrate [Bootstrap 4 ](https://getbootstrap.com/docs/4.6/getting-started/introduction/) with our project to make our template more **pretty** <br>
 But what is **bootstrap** ?? 🙄🙄
 The easiest way to integrate **Bootstrap 4** : is to add **CDN links** to our base **layout.html** <br>
 In the `<head>` tag we put the link of **CSS requirement** 👇
+
 ```jinja2
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -122,12 +131,21 @@ and in before the end tag of `<body>` we put the links of **JS requirement**
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
 ```
-and this is the file **_navbar.html**
+<br>
+
+
+## Template Includes
+
+Let's create a folder with **includes** as name in the **Templates** folder : `templates/includes`
+Now we can create the global project files 
+
+Let's start with the **_navbar.html** file  : `templates/includes/_navbar.html`
+
 ```jinja2
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="/"><Strong>My Articles</Strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-		 target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -138,41 +156,23 @@ and this is the file **_navbar.html**
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/articles">Articles</a>
+                    <a class="nav-link" href="/">Articles</a>
                 </li>
 
             </ul>
-            {% if session.logged_in %}
-                <ul class="navbar-nav">
-                    <a class="nav-link" href="/dashboard">Dashboard</a>
-                    <a class="nav-link" href="/logout">Logout</a>
-                </ul>
-            {% else %}
-                <ul class="navbar-nav">
-                    <a class="btn btn-outline-primary " href="/login">Login</a>
-                    <a class="btn btn-primary ml-2" href="/register">Register</a>
-                </ul>
-            {% endif %}
-
         </div>
     </div>
 </nav>
 ```
-and this is the file **_messages.html** 
+So Now we can **include** our **Navbar**  in the **base layout**  
+
+In the **layout.html** file we put this part of code 
+
 ```jinja2
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }} " id="custom-alert">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
-{% if error %}
-  <div class="alert alert-danger "  id="custom-alert">{{error}}</div>
-{% endif %}
-
-{% if msg %}
-  <div class="alert alert-success " id="custom-alert">{{msg}}</div>
-{% endif %}
+ {% include 'includes/_navbar.html' %}
 ```
+
+## home.html  
+
+Let's  add some element in  **home.html** 
+

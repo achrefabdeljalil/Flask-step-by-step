@@ -109,8 +109,8 @@ and update the **code** of **home.html** to
 {% endblock %}
 ```
 <br>
+<br>      
 
-  <br>
 ## Integrate bootstrap 4
 
 The next step is to integrate [Bootstrap 4 ](https://getbootstrap.com/docs/4.6/getting-started/introduction/) with our project to make our template more **pretty** <br>

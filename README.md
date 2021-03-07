@@ -175,4 +175,50 @@ In the **layout.html** file we put this part of code
 ## home.html  
 
 Let's  add some element in  **home.html** 
+```jinja2
+<div class="jumbotron mt-5">
+    <h1 class="display-4">Hello, This is My Todos App!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+        featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+</div>
+```
 
+## Getting Data from DB
+To getting our articles from **DB** we can add this code to **app.py**
+```jinja2
+@app.route('/articles')
+def articles():
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Get articles
+    result = cur.execute("SELECT * FROM articles")
+
+    articles = cur.fetchall()
+
+    return render_template('articles/articles.html', articles=articles)
+
+    cur.close()
+```
+
+let's add our template
+```
+{% block title %}
+    Articles
+{% endblock %}
+{% block body %}
+    <h1>Articles</h1>
+    {% if(articles) %}
+        <ul class="list-group">
+            {% for article in articles %}
+                <li class="list-group-item"><a href="article/{{ article.id }}">{{ article.title }}</a> <small class="float-right text-secondary">{{ article.author | title }}</small></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="margin: auto;"> There is no articles here 💔</p>
+    {% endif %}
+{% endblock %}
+```

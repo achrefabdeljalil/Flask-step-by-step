@@ -204,7 +204,7 @@ def articles():
     cur.close()
 ```
 
-let's add our template
+let's add our template **articles.html**
 ```
 {% extends 'layout.html' %}
 {% block title %}

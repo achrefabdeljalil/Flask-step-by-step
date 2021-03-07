@@ -206,6 +206,7 @@ def articles():
 
 let's add our template
 ```
+{% extends 'layout.html' %}
 {% block title %}
     Articles
 {% endblock %}
@@ -221,4 +222,5 @@ let's add our template
         <p style="margin: auto;"> There is no articles here 💔</p>
     {% endif %}
 {% endblock %}
+
 ```

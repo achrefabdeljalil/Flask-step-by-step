@@ -246,7 +246,24 @@ def article(id):
 ```
 #### 2) Template 
 Our template is soooo easy : just we create the **article.html** file **templates/articles/article.html**
-and we can put this code in our **article.html ** file
-```
+and we can put this code in our **article.html** file
+```jinja2
+{% extends 'layout.html' %}
+{% block title %}
+Article | {{ article.title |capitalize }}
+{% endblock %}
+{% block body %}
+<div class="card ">
+    <div class="card-header">
+        <h5 class="card-title d-inline"> {{ article.title | title }} </h5>
+        {% if(session.username == article.author) %}
+        <a class="btn btn-secondary float-right" href="/edit_article/{{ article.id }}">Edit</a>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        {{ article.body | safe | capitalize }}
+    </div>
+</div>
 
+{% endblock %}
 ```

@@ -187,8 +187,10 @@ Let's  add some element in  **home.html**
 ```
 
 ## Getting Data from DB
+### I) Get All Articles
+#### 1) Web Service
 To getting our articles from **DB** we can add this code to **app.py**
-```jinja2
+```python
 @app.route('/articles')
 def articles():
     # Create cursor
@@ -203,9 +205,9 @@ def articles():
 
     cur.close()
 ```
-
+#### 2) Template
 let's add our template **articles.html**
-```
+```jinja2
 {% extends 'layout.html' %}
 {% block title %}
     Articles
@@ -224,3 +226,4 @@ let's add our template **articles.html**
 {% endblock %}
 
 ```
+### II) Getting One Article (Show Article)

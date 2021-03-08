@@ -359,7 +359,7 @@ def register():
         # Close connection
         cur.close()
 
-        flash('You are now registered and can log in', 'success')
+        flash('You are now registered and you can log In', 'success')
 
         return redirect(url_for('index'))
     return render_template('auth/register.html', form=form)

@@ -280,7 +280,7 @@ Now we can import it in our base template **layout.html** , To do this just we a
 ```
 ### I) Auth : Register
 #### 1) Buttons for authentication
-To facilitate access to our routes we have to add some button in the navbar for simplicity we can just replace all the code of **\_navbar.html** by  👇
+To facilitate access to our routes we have to add some buttons :  for simplicity we can just replace all the code of **\_navbar.html** by  👇
 ```jinja2
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">

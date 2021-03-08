@@ -6,12 +6,13 @@
 
 1. Install [Python](https://www.python.org/downloads/)        
 2. Install [Xamp](https://www.apachefriends.org/fr/download.html)
-3. Install [PyCharm](https://www.jetbrains.com/fr-fr/pycharm/)         
+3. Install [PyCharm](https://www.jetbrains.com/fr-fr/pycharm/)
 4. Create a new Flask project with Pycharm                  
 
 
 ## Let's Jump In ✅✅ 
 
+Befor all actions we can add this [Chrome Extention](https://chrome.google.com/webstore/detail/codecopy/fkbfebkcoelajmhanocgppanfoojcdmg) to facilitate our work
 
 1. Lets test our functions in **app.py** by running project 
 2. To avoid running project in every single change we can activate the **debug mode**

@@ -280,7 +280,7 @@ Now we can import it in our base template **layout.html** , To do this just we a
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
 ```
 ### I) Auth : Register
-#### 1) Buttons for authentication
+#### 1) Buttons for authentication ✅✅
 To facilitate access to our routes we have to add some buttons :  for simplicity we can just replace all the code of **\_navbar.html** by  👇
 ```jinja2
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -316,7 +316,7 @@ To facilitate access to our routes we have to add some buttons :  for simplicity
     </div>
 </nav>
 ```
-#### 2) Model Creation 
+#### 2) Model Creation ✅✅
 As we see in the **MVC design pattern** we should prepare our model in work to ficilitate the work .        
 So we can add our models in **app.py** file and this code is what we will use in our project 👇👇
 ```python
@@ -333,7 +333,7 @@ class RegisterForm(Form):
 
 ```
 
-#### 3) Route for Registration
+#### 3) Route for Registration ✅✅
 As we see with other **fonctionality** ,to make an action in our app we have to make a correspendant **Route** 
 So let's do it : we can add this code to **app.py** file 👇👇
 ```python
@@ -363,5 +363,50 @@ def register():
 
         return redirect(url_for('login'))
     return render_template('auth/register.html', form=form)
+
+```
+#### 4) Template for registration ✅✅     
+So to finish our registration fonctionality w just miss the template (form)          
+To work with **the best practice** , Each **Module** in our project should be in a separated folder 😉😉✅✅
+So we have to create a new folder with **auth** as name in **templates/auth**
+And in the **auth** folder we will create the **register.html** file : **templates/auth/register.html** file 
+We just miss to put this code in our **register.html** file 👇👇
+```jinja2
+{% extends 'layout.html' %}
+{% block title %}
+    Register
+{% endblock %}
+
+{% block body %}
+    <div class="card" style="width: 30rem; margin: auto">
+        <div class="card-header">
+            <h5 class="card-title d-inline"> Register</h5>
+            <a href="/login" class="float-right"> Login</a>
+        </div>
+        <div class="card-body">
+            {% from "includes/_formhelpers.html" import render_field %}
+            <form method="POST" action="">
+                <div class="form-group">
+                    {{ render_field(form.name, class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.email, class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.username, class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.password, class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.confirm, class_="form-control") }}
+                </div>
+                <input type="submit" class="btn btn-primary float-right" value="Submit">
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
 
 ```

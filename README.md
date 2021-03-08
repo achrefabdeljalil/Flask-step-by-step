@@ -274,7 +274,7 @@ Now , look at your tab(onglet) before all title of tabs we observe that it has a
 How we can add this logo ?       
 In our project we had a **static** folder , this folder should contain our **assets(Css,Js,Images ...)**           
 So we can put this **image** in our **static** folder [Image](https://drive.google.com/file/d/1QlQT-1ukeRPtWbkEjAcGIbbBubLyeXM9/view?usp=sharing)       
-Now we can import it in our base template **layout.html** , so we can add this part of code in the `<head>` tag 
+Now we can import it in our base template **layout.html** , To do this just we add this part of code in the `<head>` tag 
 ```jinja2
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
 ```

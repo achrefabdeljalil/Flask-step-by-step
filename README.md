@@ -174,7 +174,7 @@ In the **layout.html** file we put this part of code
 
 ## home.html  
 
-Let's  add some element in  **home.html** 
+Let's  add some element in  **home.html**  in the `{% block body %}{% endblock %}`
 ```jinja2
 <div class="jumbotron mt-5">
     <h1 class="display-4">Hello, This is My Todos App!</h1>
@@ -277,4 +277,41 @@ So we can put this **image** in our **static** folder 👉👉  [Image](https://
 Now we can import it in our base template **layout.html** , To do this just we add this part of code in the `<head>` tag just after the `<title></title>` tag
 ```jinja2
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
+```
+### I) Auth : Register
+#### 1) Buttons for authentication
+To facilitate access to our routes we have to add some button in the navbar for simplicity we can just replace all the code of **\_navbar.html** by  👇
+```jinja2
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/"><Strong>My Articles</Strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/articles">Articles</a>
+                </li>
+
+            </ul>
+            {% if session.logged_in %}
+            <ul class="navbar-nav">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link" href="/logout">Logout</a>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav">
+                <a class="btn btn-sm btn-outline-primary m-1" href="/login">Login</a>
+                <a class="btn btn-sm btn-primary m-1" href="/register">Register</a>
+            </ul>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
 ```

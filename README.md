@@ -410,3 +410,37 @@ We just miss to put this code in our **register.html** file 👇👇
 {% endblock %}
 
 ```
+#### 5) Before we finish just we miss a little somthing ✅✅
+To work with the **Flash message** we can create a specefic file and include it in the base layout **layout.html**
+So we can create the **templates/includes/\_messages.html** file and put this code in 
+```jinja2
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} " id="custom-alert">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% if error %}
+  <div class="alert alert-danger "  id="custom-alert">{{error}}</div>
+{% endif %}
+
+{% if msg %}
+  <div class="alert alert-success " id="custom-alert">{{msg}}</div>
+{% endif %}
+
+```
+To work with the a specefic **form** we can create the file and include it in the our **form**
+So we can create the **templates/includes/\_formhelpers.html** file and put this code in 
+```jinja2
+{% macro render_field(field) %}
+  {{ field.label }}
+  {{ field(**kwargs)|safe }}
+  {% if field.errors %}
+    {% for error in field.errors %}
+      <span class="help-inline">{{ error }}</span>
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+```

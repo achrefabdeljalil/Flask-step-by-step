@@ -316,3 +316,52 @@ To facilitate access to our routes we have to add some buttons :  for simplicity
     </div>
 </nav>
 ```
+#### 2) Model Creation 
+As we see in the **MVC design pattern** we should prepare our model in work to ficilitate the work .        
+So we can add our models in **app.py** file and this code is what we will use in our project 👇👇
+```python
+# Register Form Class
+class RegisterForm(Form):
+    name = StringField('', [validators.Length(min=1, max=50)], render_kw={"placeholder": "Name"})
+    username = StringField('', [validators.Length(min=4, max=25)], render_kw={"placeholder": "Username"})
+    email = StringField('', [validators.Length(min=6, max=50)], render_kw={"placeholder": "Email"})
+    password = PasswordField('', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords do not match')
+    ], render_kw={"placeholder": "Password"})
+    confirm = PasswordField('', render_kw={"placeholder": "Confirm Password"})
+
+```
+
+#### 3) Route for Registration
+As we see with other **fonctionality** ,to make an action in our app we have to make a correspendant **Route** 
+So let's do it : we can add this code to **app.py** file 👇👇
+```python
+# User Register
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm(request.form)
+    if request.method == 'POST' and form.validate():
+        name = form.name.data
+        email = form.email.data
+        username = form.username.data
+        password = sha256_crypt.hash(str(form.password.data))
+        # Create cursor
+        cur = mysql.connection.cursor()
+
+        # Execute query
+        cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)",
+                    (name, email, username, password))
+
+        # Commit to DB
+        mysql.connection.commit()
+
+        # Close connection
+        cur.close()
+
+        flash('You are now registered and can log in', 'success')
+
+        return redirect(url_for('login'))
+    return render_template('auth/register.html', form=form)
+
+```

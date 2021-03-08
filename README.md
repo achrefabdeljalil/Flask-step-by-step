@@ -431,6 +431,10 @@ So we can create the **templates/includes/\_messages.html** file and put this co
 {% endif %}
 
 ```
+Let's include the **flash messages** in our base layout **layout.html**  , just before the line `{% block body %} {% endblock %}`
+```jinja2
+{% include 'includes/_messages.html' %}
+```
 To work with the a specefic **form** we can create the file and include it in the our **form**
 So we can create the **templates/includes/\_formhelpers.html** file and put this code in 
 ```jinja2

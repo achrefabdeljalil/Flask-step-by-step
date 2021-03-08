@@ -227,3 +227,26 @@ let's add our template **articles.html**
 
 ```
 ### II) Getting One Article (Show Article)
+#### 1) Web service 
+To get a single article in our app we can use the **id** as **key** for our selection so we can use the **dynamic route** `.../<type:name>` to do this .
+to do this we can add this part of code (service) in our **app.py** file 
+```python
+# Single Article
+@app.route('/article/<string:id>/')
+def article(id):
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Get article
+    result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
+
+    article = cur.fetchone()
+
+    return render_template('articles/article.html', article=article)
+```
+#### 2) Template 
+Our template is soooo easy : just we create the **article.html** file **templates/articles/article.html**
+and we can put this code in our **article.html ** file
+```
+
+```

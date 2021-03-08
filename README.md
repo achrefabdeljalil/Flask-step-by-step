@@ -435,7 +435,6 @@ To work with the a specefic **form** we can create the file and include it in th
 So we can create the **templates/includes/\_formhelpers.html** file and put this code in 
 ```jinja2
 {% macro render_field(field) %}
-  {{ field.label }}
   {{ field(**kwargs)|safe }}
   {% if field.errors %}
     {% for error in field.errors %}

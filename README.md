@@ -477,7 +477,7 @@ def login():
                 session['username'] = username
 
                 flash('You are now logged in', 'success')
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('articles'))
             else:
                 error = 'Invalid login'
                 return render_template('auth/login.html', error=error)
@@ -527,4 +527,29 @@ As we see in the **register** option we can here just create a new file with **l
 
 {% endblock %}
 
+```
+### III) Auth : Logout 
+#### 1) Route for Logout 
+To run the **logout** option we can just add the correspandant **route** in the **app.py**
+````python
+# Check if user logged in
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('To access to your dashboard, Please login', 'danger')
+            return redirect(url_for('login'))
+
+    return wrap
+
+
+# Logout
+@app.route('/logout')
+@is_logged_in
+def logout():
+    session.clear()
+    flash('You are now logged out', 'success')
+    return redirect(url_for('login'))
 ```

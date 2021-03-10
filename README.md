@@ -743,7 +743,7 @@ def edit_article(id):
 ```jinja2
 {% extends 'layout.html' %}
 {% block title %}
-    New Article
+    Edit Article
 {% endblock %}
 {% block body %}
     <div class="card" style="width: 30rem; margin: auto">
@@ -790,3 +790,5 @@ def delete_article(id):
 
     return redirect(url_for('dashboard'))
 ```
+
+# THE END 

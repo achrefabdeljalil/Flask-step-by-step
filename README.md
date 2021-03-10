@@ -268,7 +268,7 @@ Article | {{ article.title |capitalize }}
 
 {% endblock %}
 ```
-## Authentication 
+## Auth Module 
 ### Let's play 🎳🎳
 Before we creating  the **auth requirement** let's change our **Brand Logo** 🎨 :                   
 Now , look at your tab(onglet) before all title of tabs we observe that it has a logo But       
@@ -610,7 +610,7 @@ As long as our dashboard route belongs to **Auth Module** so the template will b
                         <td style="width: 5%;"><a href="edit_article/{{ article.id }}"
                                                   class="btn btn-secondary">Edit</a></td>
                         <td style="width: 5%;">
-                            <form action="{{url_for('delete_article', id=article.id)}}" method="POST">
+                            <form action="delete_article/{{article.id}}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="submit" value="Delete" class="btn btn-danger">
                             </form>
@@ -626,4 +626,167 @@ As long as our dashboard route belongs to **Auth Module** so the template will b
 
 {% endblock %}
 
+```
+## Articles Module 
+### I) New Article 
+#### 1) Route for New Article
+```python
+
+# Article Form Class
+class ArticleForm(Form):
+    title = StringField('', [validators.Length(min=1, max=200)], render_kw={"placeholder": "Title"})
+    body = TextAreaField('', [validators.Length(min=30)], render_kw={"placeholder": "Body"})
+
+
+# Add Article
+@app.route('/add_article', methods=['GET', 'POST'])
+@is_logged_in
+def add_article():
+    form = ArticleForm(request.form)
+    if request.method == 'POST' and form.validate():
+        title = form.title.data
+        body = form.body.data
+
+        # Create Cursor
+        cur = mysql.connection.cursor()
+
+        # Execute
+        cur.execute("INSERT INTO articles(title, body, author) VALUES(%s, %s, %s)", (title, body, session['username']))
+
+        # Commit to DB
+        mysql.connection.commit()
+
+        # Close connection
+        cur.close()
+
+        flash('Article Created', 'success')
+
+        return redirect(url_for('dashboard'))
+
+    return render_template('articles/add_article.html', form=form)
+
+```
+#### 2) Template for new Article
+```jinja2
+{% extends 'layout.html' %}
+{% block title %}
+    New Article
+{% endblock %}
+{% block body %}
+    <div class="card" style="width: 30rem; margin: auto">
+        <div class="card-header">
+            <h4 class="card-title"> New Article </h4>
+        </div>
+        <div class="card-body">
+            {% from "includes/_formhelpers.html" import render_field %}
+            <form method="POST" action="">
+                <div class="form-group" >
+                    {{ render_field(form.title, class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.body, class_="form-control", id="editor",placeholder="Description ") }}
+                </div>
+                <p><input class="btn btn-primary float-right" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+```
+### II) Edit Article 
+#### 1) Route for Edit Article
+```python
+
+# Edit Article
+@app.route('/edit_article/<string:id>', methods=['GET', 'POST'])
+@is_logged_in
+def edit_article(id):
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Get article by id
+    result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
+
+    article = cur.fetchone()
+    cur.close()
+    # Get form
+    form = ArticleForm(request.form)
+
+    # Populate article form fields
+    form.title.data = article['title']
+    form.body.data = article['body']
+
+    if request.method == 'POST' and form.validate():
+        title = request.form['title']
+        body = request.form['body']
+
+        # Create Cursor
+        cur = mysql.connection.cursor()
+        app.logger.info(title)
+        # Execute
+        cur.execute("UPDATE articles SET title=%s, body=%s WHERE id=%s", (title, body, id))
+        # Commit to DB
+        mysql.connection.commit()
+
+        # Close connection
+        cur.close()
+
+        flash('Article Updated', 'success')
+
+        return redirect(url_for('dashboard'))
+
+    return render_template('articles/edit_article.html', form=form)
+
+```
+#### 2) Template for Edit Article
+```jinja2
+{% extends 'layout.html' %}
+{% block title %}
+    New Article
+{% endblock %}
+{% block body %}
+    <div class="card" style="width: 30rem; margin: auto">
+        <div class="card-header">
+            <h4 class="card-title"> Edit Article </h4>
+        </div>
+        <div class="card-body">
+            {% from "includes/_formhelpers.html" import render_field %}
+            <form method="POST" action="">
+                <div class="form-group">
+                    {{ render_field(form.title, class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.body, class_="form-control", id="editor") }}
+                </div>
+                <p><input class="btn btn-primary float-right" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+```
+### III) Delete Article 
+#### 1) Route for Delete Article
+```python
+# Delete Article
+@app.route('/delete_article/<string:id>', methods=['POST'])
+@is_logged_in
+def delete_article(id):
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Execute
+    cur.execute("DELETE FROM articles WHERE id = %s", [id])
+
+    # Commit to DB
+    mysql.connection.commit()
+
+    # Close connection
+    cur.close()
+
+    flash('Article Deleted', 'success')
+
+    return redirect(url_for('dashboard'))
 ```

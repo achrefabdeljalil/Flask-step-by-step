@@ -531,7 +531,7 @@ As we see in the **register** option we can here just create a new file with **l
 ### III) Auth : Logout 
 #### 1) Route for Logout 
 To run the **logout** option we can just add the correspandant **route** in the **app.py**
-````python
+```python
 # Check if user logged in
 def is_logged_in(f):
     @wraps(f)

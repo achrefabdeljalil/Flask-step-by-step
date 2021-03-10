@@ -530,7 +530,7 @@ As we see in the **register** option we can here just create a new file with **l
 ```
 ### III) Auth : Logout 
 #### 1) Route for Logout 
-To run the **logout** option we can just add the correspandant **route** in the **app.py**
+So the last thing in **Auth Module** is To create the **logout** option,The simple way to do this is to add the correspandant **route** in the **app.py**
 ```python
 # Check if user logged in
 def is_logged_in(f):
@@ -541,7 +541,6 @@ def is_logged_in(f):
         else:
             flash('To access to your dashboard, Please login', 'danger')
             return redirect(url_for('login'))
-
     return wrap
 
 
@@ -552,4 +551,79 @@ def logout():
     session.clear()
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
+```
+### IV) Auth : My Profile (Dashboard)
+#### 1) Route for Dashboard 
+In this level We can add our Route easily : in the file **app.py** we can add this code 
+```python
+# Dashboard
+@app.route('/dashboard')
+@is_logged_in
+def dashboard():
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Get articles
+    # result = cur.execute("SELECT * FROM articles")
+    # Show articles only from the user logged in
+    result = cur.execute("SELECT * FROM articles WHERE author = %s", [session['username']])
+
+    articles = cur.fetchall()
+
+    return render_template('auth/dashboard.html', articles=articles)
+    # Close connection
+    cur.close()
+```
+#### 2) Template for Dashboard 
+As long as our dashboard route belongs to **Auth Module** so the template will be in the auth folder : **templates/auth/dashboard.html**
+```jinja2
+{% extends 'layout.html' %}
+{% block title %}
+    Dashboard
+{% endblock %}
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="d-inline"> List of articles</h3>
+            <a class="float-right btn btn-light d-inline" href="/add_article">
+                ➕
+            </a>
+        </div>
+        <div class="card-body">
+        {% if(articles) %}
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.id }}</td>
+                        <td><a href="/article/{{ article.id }}">{{ article.title }}</a></td>
+                        <td>{{ article.author }}</td>
+                        <td>{{ article.create_date }}</td>
+                        <td style="width: 5%;"><a href="edit_article/{{ article.id }}"
+                                                  class="btn btn-secondary">Edit</a></td>
+                        <td style="width: 5%;">
+                            <form action="{{url_for('delete_article', id=article.id)}}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="submit" value="Delete" class="btn btn-danger">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p style="margin: auto;"> There is no articles here 💔</p>
+        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
 ```

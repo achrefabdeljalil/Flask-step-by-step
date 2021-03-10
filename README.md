@@ -447,3 +447,84 @@ So we can create the **templates/includes/\_formhelpers.html** file and put this
   {% endif %}
 {% endmacro %}
 ```
+### II) Auth : Login
+#### 1) Route for Login ✅✅ 
+In the case bellow we have the **logic** of our **Login route** : we can add this code to **app.py** file
+```python
+# User login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Get Form Fields
+        username = request.form['username']
+        password_candidate = request.form['password']
+
+        # Create cursor
+        cur = mysql.connection.cursor()
+
+        # Get user by username
+        result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
+
+        if result > 0:
+            # Get stored hash
+            data = cur.fetchone()
+            password = data['password']
+
+            # Compare Passwords
+            if sha256_crypt.verify(password_candidate, password):
+                # Passed
+                session['logged_in'] = True
+                session['username'] = username
+
+                flash('You are now logged in', 'success')
+                return redirect(url_for('dashboard'))
+            else:
+                error = 'Invalid login'
+                return render_template('auth/login.html', error=error)
+            # Close connection
+            cur.close()
+        else:
+            error = 'Username not found'
+            return render_template('auth/login.html', error=error)
+
+    return render_template('auth/login.html')
+```   
+#### 2) Template for Login ✅✅ 
+As we see in the **register** option we can here just create a new file with **login.html** in **templates/auth/login.html**
+```jinja2
+{% extends 'layout.html' %}
+{% block title %}
+    Login
+{% endblock %}
+{% block body %}
+
+    <div class="card mt-5" style="width: 30rem; margin: auto">
+        <div class="card-header">
+            <h5 class="card-title d-inline"> Login</h5>
+            <a href="/register" class="float-right" > Register</a>
+        </div>
+        <div class="card-body">
+            <form action="" method="POST">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">&#128102;</div>
+                    </div>
+                    <input type="text" name="username" placeholder="Username" class="form-control"
+                           value={{ request.form.username }}>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">&#128273;</span>
+                    </div>
+                    <input type="password" name="password" placeholder="Password" class="form-control"
+                           value={{ request.form.password }}>
+                </div>
+                <button type="submit" class="btn btn-primary float-right">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+```

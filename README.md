@@ -629,7 +629,7 @@ As long as our dashboard route belongs to **Auth Module** so the template will b
 ```
 ## Articles Module 
 ### I) New Article 
-#### 1) Route for New Article
+#### 1) Route for New Article (app.py)
 ```python
 
 # Article Form Class
@@ -666,7 +666,7 @@ def add_article():
     return render_template('articles/add_article.html', form=form)
 
 ```
-#### 2) Template for new Article
+#### 2) Template for new Article (templates/articles/add_article.html)
 ```jinja2
 {% extends 'layout.html' %}
 {% block title %}
@@ -695,7 +695,7 @@ def add_article():
 
 ```
 ### II) Edit Article 
-#### 1) Route for Edit Article
+#### 1) Route for Edit Article (app.py)
 ```python
 
 # Edit Article
@@ -739,7 +739,7 @@ def edit_article(id):
     return render_template('articles/edit_article.html', form=form)
 
 ```
-#### 2) Template for Edit Article
+#### 2) Template for Edit Article (templates/articles/edit_article.html)
 ```jinja2
 {% extends 'layout.html' %}
 {% block title %}
@@ -768,7 +768,7 @@ def edit_article(id):
 
 ```
 ### III) Delete Article 
-#### 1) Route for Delete Article
+#### 1) Route for Delete Article (app.py)
 ```python
 # Delete Article
 @app.route('/delete_article/<string:id>', methods=['POST'])

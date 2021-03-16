@@ -76,7 +76,6 @@ mysql = MySQL(app)
 pip install passlib
 pip install flask_mysqldb 
 pip install wtforms
-pip install functools
 ```
 
 6. We can also create our database to work with , in our project 
